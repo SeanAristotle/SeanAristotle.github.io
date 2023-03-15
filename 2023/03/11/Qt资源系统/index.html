@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Qt资源系统 | 蓬莱方寸山</title><meta name="author" content="绳"><meta name="copyright" content="绳"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.Qt资源系统​    Qt资源管理系统是一种不依赖平台的独特机制，用于在应用程序的可执行文件中存储二进制文件。出于不同的目的（防止图标文件丢失或恶意更改），开发者不希望本程序的资源文件被更改。因此，把资源文件存储在可执行文件中，这就是静态加载资源方式。静态方式的缺点就是编译出的可执行文件容量会增加。为避免这一问题，将资源文件以二进制形式单独存储在一个文件中，这就是动态加载资源方式。 ​">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Qt资源系统">
+<meta property="og:url" content="https://seanaristotle.github.io/2023/03/11/Qt%E8%B5%84%E6%BA%90%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="蓬莱方寸山">
+<meta property="og:description" content="1.Qt资源系统​    Qt资源管理系统是一种不依赖平台的独特机制，用于在应用程序的可执行文件中存储二进制文件。出于不同的目的（防止图标文件丢失或恶意更改），开发者不希望本程序的资源文件被更改。因此，把资源文件存储在可执行文件中，这就是静态加载资源方式。静态方式的缺点就是编译出的可执行文件容量会增加。为避免这一问题，将资源文件以二进制形式单独存储在一个文件中，这就是动态加载资源方式。 ​">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://seanaristotle.github.io/img/shenhe3.webp">
+<meta property="article:published_time" content="2023-03-11T08:40:50.000Z">
+<meta property="article:modified_time" content="2023-03-15T12:40:02.470Z">
+<meta property="article:author" content="绳">
+<meta property="article:tag" content="Qt资源系统">
+<meta property="article:tag" content=".qrc文件">
+<meta property="article:tag" content="配置文件">
+<meta property="article:tag" content="资源加载">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://seanaristotle.github.io/img/shenhe3.webp"><link rel="shortcut icon" href="/img/tubiao.webp"><link rel="canonical" href="https://seanaristotle.github.io/2023/03/11/Qt%E8%B5%84%E6%BA%90%E7%B3%BB%E7%BB%9F/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Qt资源系统',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-15 20:40:02'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/shenhe3.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/shenhe.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="蓬莱方寸山"><span class="site-name">蓬莱方寸山</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Qt资源系统</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-11T08:40:50.000Z" title="发表于 2023-03-11 16:40:50">2023-03-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-15T12:40:02.470Z" title="更新于 2023-03-15 20:40:02">2023-03-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Qt%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/">Qt学习之路</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Qt资源系统"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="1-Qt资源系统"><a href="#1-Qt资源系统" class="headerlink" title="1.Qt资源系统"></a>1.Qt资源系统</h3><p>​    <strong>Qt资源管理系统是一种不依赖平台的独特机制，用于在应用程序的可执行文件中存储二进制文件。</strong>出于不同的目的（防止图标文件丢失或恶意更改），开发者不希望本程序的资源文件被更改。因此，把资源文件存储在可执行文件中，这就是<strong>静态加载资源方式</strong>。静态方式的缺点就是编译出的可执行文件容量会增加。为避免这一问题，将资源文件以二进制形式单独存储在一个文件中，这就是<strong>动态加载资源方式</strong>。</p>
+<p>​    Qt 资源系统是基于qmake、 rcc(Qt’s resource compiler), and QFile而实现的。 </p>
+<h3 id="2-资源收集文件-qrc"><a href="#2-资源收集文件-qrc" class="headerlink" title="2. 资源收集文件.qrc"></a>2. 资源收集文件.qrc</h3><p>​	那编译器又是如何知道哪些资源文件需要加载到可执行文件中的呢？资源收集文件.qrc闪亮登场。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">RCC</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">qresource</span> <span class="attr">prefix</span>=<span class="string">&quot;/img&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">file</span> <span class="attr">alias</span>=<span class="string">&quot;subscript_img&quot;</span>&gt;</span>zhihutubiao.png<span class="tag">&lt;/<span class="name">file</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">qresource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">qresource</span> <span class="attr">prefix</span>=<span class="string">&quot;/img/fr&quot;</span> <span class="attr">lang</span>=<span class="string">&quot;fr&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">file</span> <span class="attr">alias</span>=<span class="string">&quot;subscript_img&quot;</span>&gt;</span>zhihutubiao.png<span class="tag">&lt;/<span class="name">file</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">qresource</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">RCC</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>​    <strong>.qrc文件是基于xml格式的系统资源配置文件。</strong>该文件的file标签指出了项目所需要的资源文件，可以通过alias标签给文件分配资源名称,lang标签是语言标签，可以根据 QLocale::system().name() 返回的语言值选择加载的同名资源文件。指定的路径是相对于包含.qrc文件的目录的,请注意，列出的资源文件必须与.qrc文件位于同一目录或其子目录之一。</p>
+<p>​	项目中<strong>访问加载资源有两种方式</strong>：</p>
+<ul>
+<li>文件路径形式：&#x2F;img&#x2F;subscript_img</li>
+<li>URL形式:qrc:&#x2F;&#x2F;&#x2F;img&#x2F;subscript_img</li>
+</ul>
+<h3 id="3-创建资源收集文件-qrc"><a href="#3-创建资源收集文件-qrc" class="headerlink" title="3.创建资源收集文件.qrc"></a>3.创建资源收集文件.qrc</h3><p>​	创建资源收集文件最简单的方式就是使用Qt Creator创建。</p>
+<p>​	首先需要创建一个Qt Resource File；</p>
+<img src="./add_resorece1.png" style="zoom:50%;" />
+
+<p>​	然后，右键打开；</p>
+<img src="./add_qrc1.png" style="zoom: 50%;" />
+
+<p>​	最后，先添加标签，再添加文件。</p>
+<img src="./add_qrc2.png" style="zoom:50%;" />
+
+<p>​	使用Qt Creator创建和添加资源文件虽然方便，但是在面对大批量的资源文件时却显得力不从心，这就需要手写了。我的建议是熟悉qrc的规则，然后使用代码批量化在某一目录下的获取资源文件，剩下的就是字符串操作了。</p>
+<h3 id="4-加载资源"><a href="#4-加载资源" class="headerlink" title="4.加载资源"></a>4.加载资源</h3><p>​	加载资源有两种，一种是直接将资源数据存储在可执行文件中（<strong>静态方式</strong>），另一种是将资源数据存储在单独的二进制文件中并由可执行文件调用（<strong>动态方式</strong>）。</p>
+<h4 id="4-1静态方式"><a href="#4-1静态方式" class="headerlink" title="4.1静态方式"></a>4.1静态方式</h4><p>​	除了用 Qt Creator 在工程中添加 qrc 文件以外，需要在 pro 文件中加入 qrc 文件以便 qmake 能识别资源文件，一般这步会被自动添加。</p>
+<p>pro文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RESOURCES += \</span><br><span class="line">    res.qrc</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2动态方式"><a href="#4-2动态方式" class="headerlink" title="4.2动态方式"></a>4.2动态方式</h4><p>不会（待填坑）。</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p>1.<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/60457016?utm_id=0">Qt 资源系统（Qt Resource System）</a></p>
+<p>2.<a target="_blank" rel="noopener" href="https://blog.csdn.net/xinqingwuji/article/details/108779669">Qt资源系统(The Qt Resource System)</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://seanaristotle.github.io">绳</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://seanaristotle.github.io/2023/03/11/Qt%E8%B5%84%E6%BA%90%E7%B3%BB%E7%BB%9F/">https://seanaristotle.github.io/2023/03/11/Qt%E8%B5%84%E6%BA%90%E7%B3%BB%E7%BB%9F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://seanaristotle.github.io" target="_blank">蓬莱方寸山</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Qt%E8%B5%84%E6%BA%90%E7%B3%BB%E7%BB%9F/">Qt资源系统</a><a class="post-meta__tags" href="/tags/qrc%E6%96%87%E4%BB%B6/">.qrc文件</a><a class="post-meta__tags" href="/tags/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">配置文件</a><a class="post-meta__tags" href="/tags/%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD/">资源加载</a></div><div class="post_share"><div class="social-share" data-image="/img/shenhe3.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/03/02/leetcode%E9%9D%A2%E8%AF%95%E9%A2%980502%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="leetcode面试题0502二进制转字符串"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">leetcode面试题0502二进制转字符串</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/shenhe3.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">绳</div><div class="author-info__description">不知道你是喜欢人间的灯火，还是山林的月光？</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/seanaristotle"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/seanaristotle" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:cai_haiq@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Qt%E8%B5%84%E6%BA%90%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">1.Qt资源系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%B5%84%E6%BA%90%E6%94%B6%E9%9B%86%E6%96%87%E4%BB%B6-qrc"><span class="toc-number">2.</span> <span class="toc-text">2. 资源收集文件.qrc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BA%E8%B5%84%E6%BA%90%E6%94%B6%E9%9B%86%E6%96%87%E4%BB%B6-qrc"><span class="toc-number">3.</span> <span class="toc-text">3.创建资源收集文件.qrc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%8A%A0%E8%BD%BD%E8%B5%84%E6%BA%90"><span class="toc-number">4.</span> <span class="toc-text">4.加载资源</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1%E9%9D%99%E6%80%81%E6%96%B9%E5%BC%8F"><span class="toc-number">4.1.</span> <span class="toc-text">4.1静态方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2%E5%8A%A8%E6%80%81%E6%96%B9%E5%BC%8F"><span class="toc-number">4.2.</span> <span class="toc-text">4.2动态方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/11/Qt%E8%B5%84%E6%BA%90%E7%B3%BB%E7%BB%9F/" title="Qt资源系统">Qt资源系统</a><time datetime="2023-03-11T08:40:50.000Z" title="发表于 2023-03-11 16:40:50">2023-03-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/02/leetcode%E9%9D%A2%E8%AF%95%E9%A2%980502%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="leetcode面试题0502二进制转字符串">leetcode面试题0502二进制转字符串</a><time datetime="2023-03-02T01:52:33.000Z" title="发表于 2023-03-02 09:52:33">2023-03-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/23/KMP%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" title="KMP算法入门">KMP算法入门</a><time datetime="2023-02-23T06:50:08.000Z" title="发表于 2023-02-23 14:50:08">2023-02-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/23/%E4%BD%BF%E7%94%A8Hexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" title="使用Hexo和github搭建个人博客">使用Hexo和github搭建个人博客</a><time datetime="2023-02-23T02:14:56.000Z" title="发表于 2023-02-23 10:14:56">2023-02-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/22/hello-world/" title="Hello World">Hello World</a><time datetime="2023-02-22T08:08:54.317Z" title="发表于 2023-02-22 16:08:54">2023-02-22</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/shenhe.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 绳</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="富强,民主,文明,和谐,自由,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></body></html>
