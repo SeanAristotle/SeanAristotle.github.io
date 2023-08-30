@@ -4,6 +4,119 @@
   
     
     <entry>
+      <title>Qt按钮按动、划过背景设置</title>
+      <link href="/2023/08/30/Qt%E6%8C%89%E9%92%AE%E6%8C%89%E5%8A%A8%E3%80%81%E5%88%92%E8%BF%87%E8%83%8C%E6%99%AF%E8%AE%BE%E7%BD%AE/"/>
+      <url>/2023/08/30/Qt%E6%8C%89%E9%92%AE%E6%8C%89%E5%8A%A8%E3%80%81%E5%88%92%E8%BF%87%E8%83%8C%E6%99%AF%E8%AE%BE%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<p>给按钮添加背景后，原先按钮的按动效果就没了，（按钮没有反馈，我的手就会一直在抖，哈哈哈哈），十分的难受，于是自己给他添加初始状态，鼠标滑过和鼠标点击三种状态的效果。</p><p>解决方法：</p><p>使用样式表给按钮添加不同状态的背景图片。</p><p>效果如下：</p><img src="./presshover.gif" style="zoom:50%;" /><p>操作步骤：</p><p>1.使用Qt创建一个项目，并且将想要显示的效果图资源添加到Qt资源系统之中。</p><img src="./qrc.jpg" style="zoom:50%;" /><p>然后，在ui界面添加一个按钮控件。</p><img src="./button.jpg" style="zoom:50%;" /><p>最后，右键修改样式表如下：</p><img src="./css.jpg" style="zoom:50%;" /><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#my_button&#123;</span><br><span class="line">border-image: url(:/images/border.png);</span><br><span class="line">&#125;</span><br><span class="line">#my_button:hover&#123;</span><br><span class="line">border-image: url(:/images/bc2.png);</span><br><span class="line">&#125;</span><br><span class="line">#my_button::pressed&#123;</span><br><span class="line">border-image: url(:/images/border002.png);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>P.S.这里要指明对象，my_button就是想要添加效果的按钮。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#my_button&#123;</span><br><span class="line">border-image: url(:/images/border.png);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>上面这句是给按钮正常状态下添加背景图片。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#my_button:hover&#123;</span><br><span class="line">border-image: url(:/images/bc2.png);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>上面这句是给鼠标悬停时添加背景图片</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#my_button::pressed&#123;</span><br><span class="line">border-image: url(:/images/border002.png);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>上面这句是给鼠标点击时添加背景图片。</p><p>OK，运行就可以得到效果了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Qt学习之路 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt按钮 </tag>
+            
+            <tag> 按钮背景设置 </tag>
+            
+            <tag> 按钮动态效果 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>QComboBox使用小技巧</title>
+      <link href="/2023/05/16/QComboBox%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+      <url>/2023/05/16/QComboBox%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/</url>
+      
+        <content type="html"><![CDATA[<p>QComboBox是一个下拉列表界面类，可以使用qt设计师界面combo box添加或手动添加。</p><p>QComboBox类添加元素有二个重载的QComboBox::addItem()函数，分别为添加图标和不添加图标两个版本。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QComboBox::addItem</span><span class="params">(<span class="type">const</span> QString &amp;text, <span class="type">const</span> QVariant &amp;userData = QVariant())</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">QComboBox::addItem</span><span class="params">(<span class="type">const</span> QIcon &amp;icon, <span class="type">const</span> QString &amp;text, <span class="type">const</span> QVariant &amp;userData = QVariant())</span></span></span><br></pre></td></tr></table></figure><p>使用方法如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">QComboBox *cB_x = new QComboBox(this);</span><br><span class="line">cB_x-&gt;addItem(QString(&quot;第一项&quot;),1);</span><br><span class="line"></span><br><span class="line">QIcon cb_icon;</span><br><span class="line">cb_icon.addFile(&quot;:/images/icons/cb_icon1.ico&quot;);</span><br><span class="line">cB_x-&gt;addItem(cb_icon,QString(&quot;第一项&quot;),1);</span><br></pre></td></tr></table></figure><p>用到的三个参数分别代表</p><p>这里我们注意到有一个特殊的参数类型QVariant</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ui-&gt;cB_1-&gt;</span><br><span class="line">                    <span class="built_in">currentData</span>() <span class="built_in">currentText</span>() <span class="built_in">currentIndex</span>()</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Qt学习之路 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> QComboBox </tag>
+            
+            <tag> QVariant类 </tag>
+            
+            <tag> QVariant::value()函数 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>qt解析xml文件</title>
+      <link href="/2023/05/16/qt%E8%A7%A3%E6%9E%90xml%E6%96%87%E4%BB%B6/"/>
+      <url>/2023/05/16/qt%E8%A7%A3%E6%9E%90xml%E6%96%87%E4%BB%B6/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>qt解析json文件</title>
+      <link href="/2023/05/16/qt%E8%A7%A3%E6%9E%90json%E6%96%87%E4%BB%B6/"/>
+      <url>/2023/05/16/qt%E8%A7%A3%E6%9E%90json%E6%96%87%E4%BB%B6/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>qt串口调试助手</title>
+      <link href="/2023/05/15/qt%E4%B8%B2%E5%8F%A3%E8%B0%83%E8%AF%95%E5%8A%A9%E6%89%8B/"/>
+      <url>/2023/05/15/qt%E4%B8%B2%E5%8F%A3%E8%B0%83%E8%AF%95%E5%8A%A9%E6%89%8B/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> Qt学习之路 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> QSerialPort控件 </tag>
+            
+            <tag> 串口编程 </tag>
+            
+            <tag> 串口调试助手 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>QSpinBox的valueChanged信号</title>
       <link href="/2023/03/16/QSpinBox%E7%9A%84valueChanged%E4%BF%A1%E5%8F%B7/"/>
       <url>/2023/03/16/QSpinBox%E7%9A%84valueChanged%E4%BF%A1%E5%8F%B7/</url>
